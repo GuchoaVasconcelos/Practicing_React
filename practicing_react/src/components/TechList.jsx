@@ -8,6 +8,22 @@ export default class TechList extends Component {
     techs: ["Node.js", "ReactJS", "React Nativee", "Test"],
   };
 
+  componentDidMount() {
+    const techs = localStorage.getItem("techs");
+
+    if (techs) {
+      this.setState({ techs: JSON.parse(techs) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.techs !== this.state.techs) {
+      localStorage.setItem("techs", JSON.stringify(this.state.techs));
+    }
+  }
+
+  componentWillUnmount() {}
+
   handleInputChange = (e) => {
     console.log(e.target.value);
     this.setState({ newTech: e.target.value });
@@ -45,7 +61,6 @@ export default class TechList extends Component {
           onChange={this.handleInputChange}
           value={this.state.newTech}
         />
-        <TechItem />
         <button type="submit">Enviar</button>
       </form>
     );
