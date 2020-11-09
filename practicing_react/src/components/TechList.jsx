@@ -45,6 +45,7 @@ export default class TechList extends Component {
           onChange={this.handleInputChange}
           value={this.state.newTech}
         />
+        <TechItem />
         <button type="submit">Enviar</button>
       </form>
     );
